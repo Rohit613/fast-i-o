@@ -1,0 +1,23 @@
+public class totry {
+    public static void main(String[]args)
+    {
+        int [] a = {1,4,2,3,5};
+        System.out.println(maxprofit(a,0,1));
+        
+    }
+    static int max=0;
+    static int maxprofit(int []a,int i,int t)
+    {
+        int len = a.length;
+        if(i==len-1) return a[len-1]*t;
+        if(a[i]>a[len-1]) {
+            int temp =a[len-1];
+            a[len-1]=a[i];
+            a[i]=temp;
+            max=max+ a[i]*t+maxprofit(a,i+1,t+1);
+                       
+        }
+        else max=max+ a[i]*t+maxprofit(a,i+1,t+1);
+        return max;
+    }
+}
