@@ -1,0 +1,62 @@
+Comments//Bob and Khatu are brave soldiers in World War 3. They have spotted an enemy troop which is planting bombs. They sent message to the command centre containing 
+characters W and B where W represents a wall and B represents a Bomb. They asked command to tell them how many walls will be destroyed if all bombs explode at once. 
+One bomb can destroy 2 walls on both sides.
+Input:
+First line of input contains number of test cases T. Each test case contains a single string which contains two type of chars 'W' and 'B'.
+Output:
+For each test case print the total number of destroyed wall.
+Constraints:
+1 ≤ T ≤ 10
+1 ≤ |S| ≤ 105//
+
+
+
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+
+class TestClass {
+    public static void main(String args[] ) throws Exception {
+        
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int t = Integer.parseInt(br.readLine());
+        while(t!=0)
+        {
+            int count=0;
+            char [] a = br.readLine().toCharArray();
+            ArrayList l1 = new ArrayList();
+            for(char c:a) l1.add(c);
+            if(l1.contains('B')==false) count=0;
+            else{
+              int first=l1.indexOf('B');
+               if(first==0) count=count;
+               else if(first==1) count=count+1;
+               else count=count+2;
+               int last=l1.lastIndexOf('B');
+               if(last<(l1.size()-3)) count=count+2;
+               else count=count+(l1.size()-1-last);
+               ArrayList<Integer> l2 = new ArrayList<Integer>();
+               for(int i =0;i<a.length;i++)
+                 {
+                   if(l1.get(i).equals('B')) l2.add(i);
+                 }
+           
+              for(int i=0;i<l2.size()-1;i++)
+                {
+                if((l2.get(i+1)-l2.get(i))>1)
+                {
+                    if((l2.get(i+1)-l2.get(i))<5){
+                        count=count+(l2.get(i+1)-l2.get(i)-1);
+                         } 
+                    else count+=4;
+                }
+              }
+            } 
+            System.out.println(count);
+            t--;
+
+        }
+    }
+}
+
